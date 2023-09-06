@@ -1,5 +1,6 @@
 "use client";
 
+import Card from "../card/page";
 import ExpenseItem from "../expenseItem/page";
 
 function Expenses() {
@@ -30,11 +31,11 @@ function Expenses() {
     },
   ];
   return (
-    <div className="w-full border p-2">
+    <Card className="w-full border">
       {dataFromAPI.map((item, index) => {
         return <ExpenseItem key={item?.id} expenseInfo={item} />;
       })}
-    </div>
+    </Card>
   );
 }
 

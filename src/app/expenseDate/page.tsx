@@ -1,3 +1,6 @@
+
+import Card from "../card/page";
+
 function ExpenseDate(props: any) {
   // console.log(props.dateInfo.getDate())
   const date = props.dateInfo.getDate();
@@ -9,11 +12,11 @@ function ExpenseDate(props: any) {
     weekday: "long",
   });
   return (
-    <div className="border border-white border-2 bg-green-600 w-36 p-6 rounded-xl text-center">
+    <Card className="border border-white border-2 bg-slate-950 w-36 p-6 text-center">
       <div className="font-bold">{month}</div>
       <div className="text-sm">{year}</div>
       <div className="font-extrabold text-3xl">{date}</div>
-    </div>
+    </Card>
   );
 }
 

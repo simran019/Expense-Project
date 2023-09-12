@@ -1,4 +1,3 @@
-
 import Card from "../card/page";
 
 function ExpenseDate(props: any) {
@@ -12,7 +11,7 @@ function ExpenseDate(props: any) {
     weekday: "long",
   });
   return (
-    <Card className="border border-white border-2 bg-slate-950 w-36 p-6 text-center">
+    <Card className="border border-white border-2 rounded-xl bg-slate-950 w-36 p-6 text-center">
       <div className="font-bold">{month}</div>
       <div className="text-sm">{year}</div>
       <div className="font-extrabold text-3xl">{date}</div>

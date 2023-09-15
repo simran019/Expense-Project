@@ -7,6 +7,7 @@ import ExpenseItem from "./expenseItem/page";
 import NewExpense from "./newExpense/page";
 
 import Image from "next/image";
+import ExpenseFilter from "./expenseFilter/page";
 
 export default function Home() {
   const dataFromAPI = [
@@ -43,9 +44,14 @@ export default function Home() {
     }
     console.log(finalExpenseData)
   }
+
+  const onFilterHandler=(filteredYearData:any)=>{
+    console.log(filteredYearData)
+  }
   return (
     <Card className="w-full p-24 flex flex-col gap-2">
       <NewExpense onSaveExpenses={onSaveHandler}/>
+      <ExpenseFilter onFilterYear={onFilterHandler}/>
       {dataFromAPI.map((item, index) => {
         return <ExpenseItem key={item?.id} expenseInfo={item} />;
       })}

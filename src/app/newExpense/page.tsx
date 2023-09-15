@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Card from "../card/page";
 
-const NewExpense = () => {
+const NewExpense = (props:any) => {
   const [userInput, setUserInput] = useState({
     enteredTitle: "",
     enteredAmount: "",
@@ -27,12 +27,19 @@ const NewExpense = () => {
   };
 
   const submitHandler = () => {
-    console.log(userInput);
+    const expenseData={
+      title:userInput.enteredTitle,
+      amount:userInput.enteredAmount,
+      date:userInput.enteredDate
+    }
+    // console.log(expenseData)
     setUserInput({
       enteredTitle: "",
       enteredAmount: "",
       enteredDate: "",
     });
+
+    props.onSaveExpenses(expenseData)
   };
 
   return (

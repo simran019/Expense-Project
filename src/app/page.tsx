@@ -1,3 +1,7 @@
+"use client";
+
+import {useId} from "react";
+
 import Card from "./card/page";
 import ExpenseItem from "./expenseItem/page";
 import NewExpense from "./newExpense/page";
@@ -31,9 +35,17 @@ export default function Home() {
       date: new Date(2023, 6, 15),
     },
   ];
+  const onSaveHandler=(expenseData:any)=>{
+    
+    const finalExpenseData={
+      ...expenseData,
+      id:Math.random()
+    }
+    console.log(finalExpenseData)
+  }
   return (
     <Card className="w-full p-24 flex flex-col gap-2">
-      <NewExpense />
+      <NewExpense onSaveExpenses={onSaveHandler}/>
       {dataFromAPI.map((item, index) => {
         return <ExpenseItem key={item?.id} expenseInfo={item} />;
       })}

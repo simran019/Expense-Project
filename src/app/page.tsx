@@ -1,6 +1,6 @@
 "use client";
 
-import {useId} from "react";
+import {useId, useState} from "react";
 
 import Card from "./card/page";
 import ExpenseItem from "./expenseItem/page";
@@ -36,13 +36,19 @@ export default function Home() {
       date: new Date(2023, 6, 15),
     },
   ];
+
+  const [expenses, setExpenses] = useState(dataFromAPI);
+
   const onSaveHandler=(expenseData:any)=>{
     
     const finalExpenseData={
       ...expenseData,
       id:Math.random()
     }
-    console.log(finalExpenseData)
+    // console.log(finalExpenseData)
+    setExpenses((prevState)=>{
+      return [expenseData,...expenses]
+    })
   }
 
   const onFilterHandler=(filteredYearData:any)=>{
@@ -51,10 +57,12 @@ export default function Home() {
   return (
     <Card className="w-full p-24 flex flex-col gap-2">
       <NewExpense onSaveExpenses={onSaveHandler}/>
-      <ExpenseFilter onFilterYear={onFilterHandler}/>
-      {dataFromAPI.map((item, index) => {
+      <div className="bg-gray-800 p-4 rounded-xl">
+      <ExpenseFilter onFilterYear={onFilterHandler}  />
+      {expenses.map((item, index) => {
         return <ExpenseItem key={item?.id} expenseInfo={item} />;
       })}
+      </div>
     </Card>
   );
 }

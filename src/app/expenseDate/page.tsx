@@ -1,7 +1,6 @@
 import Card from "../card/page";
 
 function ExpenseDate(props: any) {
-  // console.log(props.dateInfo.getDate())
   const date = props.dateInfo.getDate();
   const month = props.dateInfo.toLocaleString("en-US", {
     month: "long",

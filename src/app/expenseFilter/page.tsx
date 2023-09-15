@@ -23,10 +23,10 @@ const ExpenseFilter = (props:any) => {
   };
 
   return (
-    <div className="bg-gray-100 w-full rounded-md p-4 text-black flex justify-between">
+    <div className="bg-gray-800 w-full rounded-md p-4 text-slate-100 flex justify-between">
       <h1 className="text-xl font-bold">Filter by year</h1>
       <select
-        className="border-black border-2 rounded-md p-2"
+        className="border-black border-2 rounded-md p-2 text-black"
         onChange={clickHandler}
       >
         <option value="2020">2020</option>
@@ -34,7 +34,7 @@ const ExpenseFilter = (props:any) => {
         <option value="2022">2022</option>
         <option value="2023">2023</option>
       </select>
-      <p>Data for years {filterInfoText} is hidden</p>
+      {/* <p>Data for years {filterInfoText} is hidden</p> */}
     </div>
   );
 };

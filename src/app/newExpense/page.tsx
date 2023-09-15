@@ -30,9 +30,9 @@ const NewExpense = (props:any) => {
     const expenseData={
       title:userInput.enteredTitle,
       amount:userInput.enteredAmount,
-      date:userInput.enteredDate
+      date: new Date(userInput.enteredDate)
     }
-    // console.log(expenseData)
+    console.log(expenseData)
     setUserInput({
       enteredTitle: "",
       enteredAmount: "",

@@ -3,22 +3,11 @@
 import { useState } from "react";
 
 const ExpenseFilter = (props:any) => {
-  const [filterYear, setFilterYear] = useState("2020");
-
-   let filterInfoText='2020, 2021 and 2022';
-   if(filterYear==='2020'){
-    filterInfoText='2021, 2022 and 2023';
-   } else if(filterYear==='2021'){
-    filterInfoText='2020, 2022 and 2023'
-   }else if(filterYear==='2022'){
-    filterInfoText='2020, 2021 and 2023'
-   }else{
-    filterInfoText='2020, 2021 and 2022'
-   }
+  
 
   const clickHandler = (event: any) => {
     const selectedYear = event.target.value;
-    setFilterYear(selectedYear);
+    // setFilterYear(selectedYear);
     props.onFilterYear(selectedYear)
   };
 
@@ -29,6 +18,7 @@ const ExpenseFilter = (props:any) => {
         className="border-black border-2 rounded-md p-2 text-black"
         onChange={clickHandler}
       >
+        <option value="none">select Year</option>
         <option value="2020">2020</option>
         <option value="2021">2021</option>
         <option value="2022">2022</option>

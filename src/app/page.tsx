@@ -71,7 +71,7 @@ export default function Home() {
     return info.date.getFullYear()==filterYear
   }
   const filteredExpenseItems=dataFromAPI.filter(filterArrayAsPerYear);
-  // console.log(filteredExpenseItems);
+  console.log(filterYear);
   
   return (
     <Card className="w-full p-24 flex flex-col gap-2">
@@ -83,16 +83,15 @@ export default function Home() {
         filteredExpenseItems.map((item, index) => {
           return <ExpenseItem key={item?.id} expenseInfo={item}/>;
         })
-       ) :(
+       ):filterYear=="none"?(
         expenses.map((item, index) => {
           return <ExpenseItem key={item?.id} expenseInfo={item}/>;
         })
+       ):
+       (
+        <p className="text-center">No items for this year</p>
        )
       }
-      {/* {expenses.map((item, index) => {
-        return <ExpenseItem key={item?.id} expenseInfo={item}/>;
-      })} */}
-      
       </div>
     </Card>
   );

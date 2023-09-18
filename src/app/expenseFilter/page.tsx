@@ -18,7 +18,7 @@ const ExpenseFilter = (props:any) => {
         className="border-black border-2 rounded-md p-2 text-black"
         onChange={clickHandler}
       >
-        <option value="none">select Year</option>
+        <option value="none">Select Year</option>
         <option value="2020">2020</option>
         <option value="2021">2021</option>
         <option value="2022">2022</option>

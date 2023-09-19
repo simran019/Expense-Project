@@ -3,7 +3,9 @@
 import { useState } from "react";
 import Card from "../card/page";
 
-const NewExpense = (props:any) => {
+const NewExpense = (props: any) => {
+  const [showForm, setShowForm] = useState(false);
+
   const [userInput, setUserInput] = useState({
     enteredTitle: "",
     enteredAmount: "",
@@ -27,22 +29,22 @@ const NewExpense = (props:any) => {
   };
 
   const submitHandler = () => {
-    const expenseData={
-      title:userInput.enteredTitle,
-      amount:userInput.enteredAmount,
-      date: new Date(userInput.enteredDate)
-    }
-    console.log(expenseData)
+    const expenseData = {
+      title: userInput.enteredTitle,
+      amount: userInput.enteredAmount,
+      date: new Date(userInput.enteredDate),
+    };
+    console.log(expenseData);
     setUserInput({
       enteredTitle: "",
       enteredAmount: "",
       enteredDate: "",
     });
 
-    props.onSaveExpenses(expenseData)
+    props.onSaveExpenses(expenseData);
   };
 
-  return (
+  return showForm ? (
     <form onSubmit={submitHandler}>
       <div className="bg-fuchsia-500 border-2 border-white rounded-xl flex flex-col h-fit p-4 gap-4 text-black items-center text-xl font-bold">
         <div className="flex justify-between gap-4 w-1/2 p-4 ">
@@ -86,9 +88,24 @@ const NewExpense = (props:any) => {
           >
             Add Expense
           </div>
+          <div
+            className="bg-purple-950 text-center p-2 rounded-md text-white self-center cursor-pointer hover:bg-purple-900"
+            onClick={() => setShowForm(false)}
+          >
+            Cancel
+          </div>
         </div>
       </div>
     </form>
+  ) : (
+    <div className="bg-fuchsia-500 border-2 border-white rounded-xl flex flex-col h-fit p-4 gap-4 text-black items-center text-xl font-bold">
+      <div
+        className="w-fit bg-purple-950 text-center p-2 rounded-md text-white self-center cursor-pointer hover:bg-purple-900"
+        onClick={() => setShowForm(true)}
+      >
+        Add New Expense
+      </div>
+    </div>
   );
 };
 

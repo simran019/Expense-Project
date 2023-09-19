@@ -1,6 +1,6 @@
 "use client";
 
-import {useId, useState} from "react";
+import { useId, useState } from "react";
 
 import Card from "./card/page";
 import ExpenseItem from "./expenseItem/page";
@@ -8,6 +8,7 @@ import NewExpense from "./newExpense/page";
 
 import Image from "next/image";
 import ExpenseFilter from "./expenseFilter/page";
+import ExpenseList from "./expenselist/page";
 
 export default function Home() {
   const dataFromAPI = [
@@ -21,7 +22,7 @@ export default function Home() {
       id: "e2",
       title: "Shopping",
       amount: "150",
-      date: new Date(2021, 7, 21),
+      date: new Date(2020, 7, 21),
     },
     {
       id: "e3",
@@ -39,59 +40,47 @@ export default function Home() {
 
   const [expenses, setExpenses] = useState(dataFromAPI);
 
-  const onSaveHandler=(expenseData:any)=>{
-    
-    const finalExpenseData={
+  const onSaveHandler = (expenseData: any) => {
+    const finalExpenseData = {
       ...expenseData,
-      id:Math.random()
-    }
+      id: Math.random(),
+    };
     // console.log(finalExpenseData)
-    setExpenses((prevState)=>{
-      return [expenseData,...expenses]
-    })
-  }
+    setExpenses((prevState) => {
+      return [expenseData, ...expenses];
+    });
+  };
   const [filterYear, setFilterYear] = useState("none");
 
-  let filterInfoText='2020, 2021 and 2022';
-  if(filterYear==='2020'){
-   filterInfoText='2021, 2022 and 2023';
-  } else if(filterYear==='2021'){
-   filterInfoText='2020, 2022 and 2023'
-  }else if(filterYear==='2022'){
-   filterInfoText='2020, 2021 and 2023'
-  }else{
-   filterInfoText='2020, 2021 and 2022'
+  let filterInfoText = "2020, 2021 and 2022";
+  if (filterYear === "2020") {
+    filterInfoText = "2021, 2022 and 2023";
+  } else if (filterYear === "2021") {
+    filterInfoText = "2020, 2022 and 2023";
+  } else if (filterYear === "2022") {
+    filterInfoText = "2020, 2021 and 2023";
+  } else {
+    filterInfoText = "2020, 2021 and 2022";
   }
-  const onFilterHandler=(filteredYearData:any)=>{
-    setFilterYear(filteredYearData)
-
-  }
-  const filterArrayAsPerYear=(info:any)=>{
+  const onFilterHandler = (filteredYearData: any) => {
+    setFilterYear(filteredYearData);
+  };
+  const filterArrayAsPerYear = (info: any) => {
     // return year==filterYear
-    return info.date.getFullYear()==filterYear
-  }
-  const filteredExpenseItems=dataFromAPI.filter(filterArrayAsPerYear);
-  console.log(filterYear);
-  
+    return info.date.getFullYear() == filterYear;
+  };
+  const filteredExpenseItems = dataFromAPI.filter(filterArrayAsPerYear);
+
   return (
     <Card className="w-full p-24 flex flex-col gap-2">
-      <NewExpense onSaveExpenses={onSaveHandler}/>
+      <NewExpense onSaveExpenses={onSaveHandler} />
       <div className="bg-gray-800 p-4 rounded-xl">
-      <ExpenseFilter onFilterYear={onFilterHandler}  selected={filterYear}/>
-      {
-       filteredExpenseItems.length>0?(
-        filteredExpenseItems.map((item, index) => {
-          return <ExpenseItem key={item?.id} expenseInfo={item}/>;
-        })
-       ):filterYear=="none"?(
-        expenses.map((item, index) => {
-          return <ExpenseItem key={item?.id} expenseInfo={item}/>;
-        })
-       ):
-       (
-        <p className="text-center">No items for this year</p>
-       )
-      }
+        <ExpenseFilter onFilterYear={onFilterHandler} selected={filterYear} />
+        <ExpenseList
+          items={filteredExpenseItems}
+          selected={filterYear}
+          expenseInfo={expenses}
+        />
       </div>
     </Card>
   );

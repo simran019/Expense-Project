@@ -5,6 +5,7 @@ import { useId, useState } from "react";
 import Card from "./card/page";
 import ExpenseItem from "./expenseItem/page";
 import NewExpense from "./newExpense/page";
+import Chart from "./chart/page";
 
 import Image from "next/image";
 import ExpenseFilter from "./expenseFilter/page";
@@ -76,6 +77,7 @@ export default function Home() {
       <NewExpense onSaveExpenses={onSaveHandler} />
       <div className="bg-gray-800 p-4 rounded-xl">
         <ExpenseFilter onFilterYear={onFilterHandler} selected={filterYear} />
+        <Chart dataPoints={filteredExpenseItems}/>
         <ExpenseList
           items={filteredExpenseItems}
           selected={filterYear}
